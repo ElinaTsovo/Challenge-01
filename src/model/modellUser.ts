@@ -1,41 +1,44 @@
-import { Schema,model } from "mongoose";
+import { Schema, model } from "mongoose";
 
-const dataUser = new Schema({
-        nameUser:{
-            type:String,
-            required:true
-        },
+const dataUser = new Schema(
+  {
+    uid: {
+      type: String,
+      unique: true,
+      required: true
+    },
 
-        emailUser:{
-            type:String,
-            required:true
-        },
+    nameUser: {
+      type: String,
+      required: true,
+      min: 4
+    },
 
-        contactUser:{
-            type:String,
-            required:true
-        },
+    emailUser: {
+      field: { 
+        type: String, 
+        required: true,
+         min: 4
+         },
 
-        cityUser:{
-            type:String,
-            required:true
-        },
+      verify: {
+        type: Boolean,
+        required: true,
+        default: false
+      }
+    },
 
-        passwordUser:{
-            type:String,
-            required: true
-        },
+    passwordUser: {
+      type: Schema.Types.ObjectId,
+      ref: "password",
+      required: true
+    },
 
-        borndayUser:{
-            type:String,
-            required: true
-        },
+    photoprofileUser: {
+      type: String,
+      default: null
+    },
 
-        profileUser:{
-            type:String,
-        }
+  },{ timestamps: true });
 
-        
-}, {timestamps:true})
-
-export const user = model ('datauser', dataUser)
+export const users = model("datauser", dataUser);
